@@ -63,3 +63,11 @@ a {
 h1{
   color: white;
 }
+@media only screen and (max-width: 767px) {
+  .main-div {
+    width: auto;
+  }
+  h1 {
+    font-size: 25px;
+  }
+}
