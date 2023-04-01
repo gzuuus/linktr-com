@@ -70,4 +70,14 @@ h1{
   h1 {
     font-size: 25px;
   }
+  body {
+    display: flex;
+    align-items: flex-start;
+  }
+  .main-div {
+    margin-top: 20px;
+  }
+  li {
+    margin: 15px;
+  }
 }
