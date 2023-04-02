@@ -57,7 +57,7 @@ li:hover {
   background-color: #3d2657;
 }
 img{
-  padding: 10px 0px;
+  padding: 0px 0px;
 }
 a {
   color: white;
@@ -78,9 +78,7 @@ h1, h2, h3{
   }
   body {
     display: block;
-  }
-  .main-div {
-    margin-top: 20px;
+    height: auto;
   }
   li {
     margin: 15px;
