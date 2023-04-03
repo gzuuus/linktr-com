@@ -50,6 +50,9 @@ body {
 	max-width: 18px;
   opacity: 80%;
 }
+.header-img{
+  max-width: 200px;
+}
 .dbuttons.inner {
 	width: 50%;
 }
