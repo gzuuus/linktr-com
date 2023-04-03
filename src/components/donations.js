@@ -5,8 +5,11 @@ export const Donations = () => {
     <div className='donations'>
       <h3>Donaciones</h3>
       <ul className='dbuttons'>
-        <li><a href="lightning:bitcoinbarcelona@getalby.com "target="_blank"rel="noreferrer">⚡ Lightning</a></li>
-        <li><a href="https://btcpay.bitcoinbarcelona.xyz/"target="_blank"rel="noreferrer">🔗 On-chain</a></li>
+        <div className='dbuttons inner'>
+          <li><a href="lightning:bitcoinbarcelona@getalby.com "target="_blank"rel="noreferrer">⚡ Lightning</a></li>
+          <li><a href="https://getalby.com/p/bitcoinbarcelona "target="_blank"rel="noreferrer"><img className='exit-icon' src='./img/fi-br-sign-out.svg'></img></a></li>
+        </div>
+        <li className='dbuttons-last'><a href="https://btcpay.bitcoinbarcelona.xyz/"target="_blank"rel="noreferrer">🔗 On-chain</a></li>
       </ul>
     </div>
   )

@@ -30,15 +30,33 @@ body {
 .container ul {
 	width: 100%;
 }
-.donations{
-  text-align: center
+.donations {
+	display: flex;
+	flex-direction: column;
+  text-align: center;
 }
 .dbuttons {
 	display: flex;
+	flex: 0 0 auto;
 }
 .dbuttons li {
 	width: 100%;
 	margin: 0px 10px;
+}
+.comb {
+	display: inline-block;
+}
+.exit-icon {
+	max-width: 18px;
+  opacity: 80%;
+}
+.dbuttons.inner {
+	width: 50%;
+}
+.inner li:last-child {
+	margin: 0px;
+	width: auto;
+	padding: 15px;
 }
 ul {
   list-style-type: none;
@@ -82,5 +100,8 @@ h1, h2, h3{
   }
   li {
     margin: 15px;
+  }
+  .dbuttons.inner {
+    width: auto;
   }
 }
