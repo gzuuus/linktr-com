@@ -19,7 +19,6 @@ async function getPublicKey() {
 const connectRelay = async (publicKey) => {
     const pool = new SimplePool()
     let relays = ['wss://nos.lol', 'wss://relay.punkhub.me'];
-    let list;
     let sub = pool.sub(
         [...relays],
         [
@@ -73,9 +72,6 @@ const connectRelay = async (publicKey) => {
       
   };
 
-
-
-
 export const Nostr = () => {
   return (
     <div className='nostr-container'>
@@ -87,3 +83,4 @@ export const Nostr = () => {
     </div>
   )
 }
+export default Nostr
