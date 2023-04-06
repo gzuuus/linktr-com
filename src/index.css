@@ -13,11 +13,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: #10051e;
+  color: white;
 }
+
 .main-div {
 	width: 30em;
+  margin-top: 40px;
 }
 .container {
 	display: flex;
@@ -30,10 +32,32 @@ body {
 .container ul {
 	width: 100%;
 }
+/*Message container*/
+.nostr-container{
+  overflow: scroll;
+  text-align: center;
+}
+div.message-kind0, div.message-kind1{
+  background-color: #210b3c;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.pfp-container{
+  margin: 10px 10px 20px 10px;
+}
+.pfp-image{
+  height: 100px;
+  width: auto;
+  border-radius: 50px;
+}
+
 .donations {
 	display: flex;
 	flex-direction: column;
   text-align: center;
+  word-wrap: break-word;
 }
 .dbuttons {
 	display: flex;
@@ -51,7 +75,7 @@ body {
   opacity: 80%;
 }
 .header-img{
-  max-width: 200px;
+  max-width: 120px;
 }
 .dbuttons.inner {
 	width: 50%;
@@ -88,8 +112,12 @@ h1, h2, h3{
   color: white;
 }
 @media only screen and (max-width: 767px) {
+  .header-img{
+    max-width: 100px;
+  }
   .main-div {
     width: 100%;
+    margin-top: 0px;
   }
   .container{
     background: none;
@@ -102,7 +130,8 @@ h1, h2, h3{
     height: auto;
   }
   li {
-    margin: 15px;
+    margin: 12px;
+    padding: 12px 25px;
   }
   .dbuttons.inner {
     width: auto;
