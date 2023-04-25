@@ -1,16 +1,19 @@
 import React from 'react';
-import { Links } from './components/links';
-import { Donations } from './components/donations';
-import { Nostr } from './components/nostr';
-import {SimplePool} from 'nostr-tools'
+import { Links } from './components/Links';
+import { Donations } from './components/Donations';
+import Nostr from './components/Nostr';
 
 function App() {
 
   return (
-    <div className='main-div'>
-      <Links></Links>
-      <Donations></Donations>
-      <Nostr></Nostr>
+    <div className='mainDiv'>
+      <div className='mainContainer'>
+        <img className='header-img' src="./img/logo-purple.svg" alt="pfp"></img>
+        <h1>PunkHub</h1>
+        <Links></Links>
+        <Donations></Donations>
+        {/* <Nostr></Nostr> */}
+      </div>
     </div>
   );
 }

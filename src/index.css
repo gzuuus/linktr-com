@@ -25,12 +25,12 @@ code {
     monospace;
 }
 
-.main-div {
+.mainDiv {
 	width: 30em;
   margin-top: 40px;
 }
 
-.container {
+.mainContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -39,15 +39,16 @@ code {
 	border-radius: 20px;
 }
 
-.container > ul {
+.linkContainer {
 	width: 100%;
 }
 
-.nostr-container{
+.nostrContainer{
   text-align: center;
+  width: 100%;
 }
 .nostr-img {
-	max-width: 90%;
+	max-width: 100px;
 	margin: 10px;
 }
 
@@ -74,6 +75,7 @@ div.message-kind0, div.message-kind1{
 	flex-direction: column;
   text-align: center;
   word-wrap: break-word;
+  width: 100%;
 }
 .exit-icon {
 	max-width: 18px;
@@ -82,6 +84,7 @@ div.message-kind0, div.message-kind1{
 
 .header-img{
   max-width: 120px;
+  border-radius: 80px;
 }
 
 .dbuttons.inner {
@@ -136,11 +139,11 @@ h1, h2, h3{
   .header-img{
     max-width: 100px;
   }
-  .main-div {
+  .mainDiv {
     width: 100%;
     margin-top: 0px;
   }
-  .container{
+  .mainContainer{
     background: none;
   }
   h1 {
