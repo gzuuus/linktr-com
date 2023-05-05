@@ -1,13 +1,3 @@
-:root {
-  --background-color: #10051e;
-  --container-b-color: #210b3c;
-  --elements-b-color: #2a193e;
-  --hover-b-color: #3d2657;
-  --text-color: white;
-  --hover-color: #ff9900;
-  --a-color: #b99add;
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -21,82 +11,13 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	background-color: var(--elements-b-color);
+  font-size: small;
+	padding: 5px 10px;
+	border-radius: 10px;
+  color: var(--accent-color);
 }
-
-.mainDiv {
-	width: 30em;
-  margin-top: 40px;
-}
-
-.mainContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: var(--container-b-color);
-	padding: 30px 0px 0px 0px;
-	border-radius: 20px;
-}
-
-.linkContainer {
-	width: 100%;
-}
-
-.nostrContainer{
-  text-align: center;
-  width: 100%;
-}
-.nostr-img {
-	max-width: 100px;
-	margin: 10px;
-}
-
-div.message-kind0, div.message-kind1{
-  background-color: var(--container-b-color);
-  margin: 10px;
-  padding: 15px;
-  border-radius: 10px;
-  word-wrap: break-word;
-}
-
-.pfp-container{
-  margin: 10px 10px 20px 10px;
-}
-
-.pfp-image{
-  height: 100px;
-  width: auto;
-  border-radius: 50px;
-}
-
-.donations {
-	display: flex;
-	flex-direction: column;
-  text-align: center;
-  word-wrap: break-word;
-  width: 100%;
-}
-.exit-icon {
-	max-width: 18px;
-  opacity: 80%;
-}
-
-.header-img{
-  max-width: 120px;
-  border-radius: 80px;
-}
-
-.dbuttons.inner {
-	width: 50%;
-}
-
-.inner > li:last-child {
-	margin: 0px;
-	width: auto;
-	padding: 15px;
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -127,17 +48,202 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+a:hover, li:hover {
   color: var(--hover-color);
+
+}
+a code {
   text-decoration: none;
 }
-h1, h2, h3{
+a code:hover {
+	color: var(--hover-color);
+}
+.meetupElement h4,
+.meetupElement span{
+	background: var(--translucid-b-color);
+	padding: 5px;
+	border-radius: 15px;
+  text-shadow: 0 0 10px var(--elements-b-color);
+}
+.meetupElement h4:hover {
+  color: var(--hover-color);
+}
+h1, h2, h3, h4{
   color: var(--text-color);
+  margin: 0px;
+}
+a svg path {
+  fill: var(--accent-color);
+}
+a svg:hover path {
+  fill: var(--hover-color);
+}
+svg {
+	width: 100%;
+  overflow: visible;
+}
+.svg-src {
+	background: var(--elements-b-color);
+	border-radius: 25px;
+	padding: 10px;
+  margin: 0px 5px;	
+  width: auto;
+}
+hr {
+	color: var(--hover-b-color);
+	margin: 10px 0px;
+}
+div.message-kind0, div.message-kind1{
+  background-color: var(--container-b-color);
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.mainDiv {
+	width: 30em;
+  margin-top: 40px;
+}
+
+.mainContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--container-b-color);
+	padding: 30px 0px 0px 0px;
+	border-radius: 20px;
+}
+
+.meetupElementDiv {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 20px;
+  margin: 15px 0px;
+}
+
+.meetupElementContent {
+  padding:15px;
+  background-color: var(--translucid-b-color);
+}
+.meetupElementContent h4 {
+	margin-bottom: 10px;
+}
+
+.linkContainer {
+	width: 100%;
+}
+.nostrContainer{
+  text-align: center;
+  width: 100%;
+}
+.nostr-img {
+	max-width: 100px;
+	margin: 10px;
+}
+.pfp-container{
+  margin: 10px 10px 20px 10px;
+}
+
+.pfp-image{
+  height: 100px;
+  width: auto;
+  border-radius: 50px;
+}
+
+.donations {
+	display: flex;
+	flex-direction: column;
+  text-align: center;
+  word-wrap: break-word;
+  width: 100%;
+}
+.exit-icon {
+	max-width: 18px;
+  opacity: 80%;
+}
+
+.header-img {
+	max-width: 120px;
+	border-radius: 80px;
+	margin-bottom: 15px;
+}
+
+.dbuttons.inner {
+	width: 50%;
+}
+
+.inner > li:last-child {
+	margin: 0px;
+	width: auto;
+	padding: 15px;
+}
+.nostrContainer {
+  word-break: break-word;
+}
+.noteContainer {
+	background-color: var(--container-b-color);
+	padding: 5px 15px 10px 15px;
+	border-radius: 15px;
+	margin: 15px 0px;
+}
+.noteContentContainer, .noteContainerKind0 {
+	margin: 10px 0px;
+}
+.noteContentContainer a {
+	text-decoration: underline;
+}
+.isImage, .isVideo {
+	width: 100%;
+	max-height: 650px;
+	max-width: 500px;
+	display: block;
+	margin: 15px 0px;
+}
+.urlPreview{
+  padding: 5px;
+	background: var(--hover-b-color);
+	border-radius: 15px;
+  margin: 10px 0px;
+}
+.meetupContainer {
+	text-align: center;
+}
+.logo2140 {
+	width: 70%;
+  background: var(--accent-color);
+  margin-top: 21px;
+  padding: 0px 21px;
+  border-radius: 85px;
+}
+.nostrLogo {
+	max-height: 72px;
+	background: var(--accent-color);
+	width: auto;
+	border-radius: 85px;
+	padding: 21px;
+	margin: 21px;
+}
+.nostrLogo path {
+	fill: var(--hover-b-color);
+}
+.noteButtonBox {
+	display: flex;
+	justify-content: center;
+}
+.noteDateSpan {
+	display: block;
+	margin: 10px 0px;
+}
+.noteTagContainer {
+	margin-bottom: 15px;
 }
 
 @media only screen and (max-width: 767px) {
   .header-img{
     max-width: 100px;
+    margin: 5px;
   }
   .mainDiv {
     width: 100%;

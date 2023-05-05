@@ -1,108 +1,121 @@
-import React, { useState, useEffect } from 'react';
-import {SimplePool, nip19} from 'nostr-tools'
-import DOMPurify from 'dompurify';
-import { marked } from 'marked';
-function Nostr() {
-    const [pubKey, setJsonData] = useState("");
-  
-    useEffect(() => {
-      async function fetchJsonData() {
-        const response = await fetch(`${window.location.href}/.well-know/nostr.json`);
-        const data = await response.json();
-        const names = data.names;
-        const firstKeyValue = names[Object.keys(names)[0]];
-        setJsonData(firstKeyValue);
-      }
-      fetchJsonData();
-    }, []);
+import { RelayPool } from "nostr-relaypool";
+import { nip19, utils } from "nostr-tools";
+import React, {useEffect, useMemo, useState } from "react";
+import EventListComponent from './EventListComponent';
+import { NostrLogo } from "../graphics/index.js";
 
-    useEffect(() => {
-        async function connectRelay() {
-          if (!pubKey) {
-            return;
-          }
-    
-          const pool = new SimplePool();
-          const relays = [ "wss://nos.lol",
-            "wss://relay.nostr.band",
-            "wss://nostr.wine/",
-            "wss://universe.nostrich.land/",
-            "wss://welcome.nostr.wine/"];
-          const sub = pool.sub(
-            [...relays],
+const Nostr = () => {
+  const [events, setEvents] = useState([]);
+  // const [userRelayList, setuserRelayList] = useState([]);
+  const [uniqueEvents, setUniqueEvents] = useState(new Set());
+
+  const relayList = useMemo(() => [
+    "wss://nos.lol",
+    "wss://relay.nostr.band",
+    "wss://nostr.wine/",
+    "wss://universe.nostrich.land/",
+    "wss://purplepag.es/"
+  ], []);
+
+  const getHexPubKey = (inNpub) => {
+    switch (true) {
+      case !inNpub && process.env.REACT_APP_NOSTR_PUBKEY?.startsWith("npub1"):
+        return nip19.decode(process.env.REACT_APP_NOSTR_PUBKEY).data;
+      case inNpub:
+        return process.env.REACT_APP_NOSTR_PUBKEY;
+      default:
+        return process.env.REACT_APP_NOSTR_PUBKEY;
+    }
+  };
+  
+  
+  useEffect(() => {
+    const onLoad = () => {
+      const relayPool = new RelayPool(relayList);
+
+      relayPool.subscribe(
+        [
+          {
+            kinds: [3,10002],
+            authors: [getHexPubKey()],
+          },
+        ],
+        relayList,
+        (event, isAfterEose, relayURL) => {
+          let objRelays = [];
+          const objRecommendedRelays = [];
+          try {
+
+            if (event.kind === 3) {
+              objRelays = Object.keys(JSON.parse(event.content));
+            }}catch (error) {
+              console.error(error);
+            }
+            event.tags.forEach(tag => {
+              if (tag[0] === "r") {
+                objRecommendedRelays.push(tag[1]);
+              }
+            });
+            const userRelayList = [...objRelays, ...objRecommendedRelays];
+          relayPool.subscribe(
             [
               {
-                kinds: [0, 30023],
-                authors: [pubKey],
-                // since: Math.floor((Date.now() / 1000)-86400),
-
+                kinds: [0],
+                authors: [getHexPubKey()],
               },
-            ]
-          )
-            const messageContainer = document.getElementById('message-container');
-            const messageKind0Container = document.getElementById('message-kind0-container');
-            messageContainer.textContent = '';
-            messageKind0Container.textContent = '';
-
-            sub.on('event', (event) => {
-                const { kind, content, pubkey, id, created_at } = event;
-            
-                if (kind === 0) {
-                let latestMessage = null;
-                const contentObj = JSON.parse(content);
-                const messages = `
-                    <p><strong>pubkey:</strong> ${pubkey}</p>
-                `;
-                // <div class="pfp-container">
-                // <img class="pfp-image" src="${contentObj.picture}" alt="pfp">
-                // </div>
-                // <p><strong>${contentObj.name}</strong></p>
-                // <p>${contentObj.about}</p>
-                // <p><a href="${contentObj.about}" target="_blank" rel="noreferrer">Website</a></p>
-                const messageElement = document.createElement('div');
-                messageElement.innerHTML = messages;
-                messageElement.classList.add('message-kind0');
-            
-                // Only show the latest message
-                if (!latestMessage || Date.parse(created_at) > Date.parse(latestMessage.created_at)) {
-                    messageKind0Container.textContent = '';
-                    messageKind0Container.appendChild(messageElement);
-                }
-                }
-                if (kind === 30023) {
-                  console.log(event.tags[1]);
-                  const noteId = nip19.noteEncode(id);
-                  const contentWithLinks = content.replace(/(https?:\/\/\S+)/gi, (match) => {
-                      const imgRegex = /\.(jpg|jpeg|png|webp|gif)$/i;
-                      if (imgRegex.test(match)) {
-                      return `<img class="nostr-img" src="${match}" alt="${match}">`;
-                      } else {
-                      return `[${match}](${match})`;
-                      }
-                  });
-                  const messages = `
-                      <div>${DOMPurify.sanitize(marked(contentWithLinks))}</div>
-                      <ul>
-                      <a href="https://snort.social/e/${noteId}" target="_blank" rel="noopener noreferrer"><li>View outside</li></a>
-                      </ul>
-                  `;
-                  const messageElement = document.createElement('div');
-                  messageElement.innerHTML = messages;
-                  messageElement.classList.add('message-kind1');
-                  messageContainer.appendChild(messageElement);
-                }
-            });  
+              {
+                kinds: [1],
+                authors: [getHexPubKey()],
+                // since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
+              },
+            ],
+            userRelayList,
+            (event, isAfterEose, relayURL) => {
+              if (!uniqueEvents.has(event.id)) {
+                setUniqueEvents(new Set(uniqueEvents.add(event.id)));
+                  setEvents(events =>
+                    utils.insertEventIntoDescendingList(events, event))
+              }
+              //console.log(event, isAfterEose, relayURL);
+            },
+            undefined,
+            (events, relayURL) => {
+              //console.log(events, relayURL);
+            }
+          );
+        },
+        undefined,
+        (events, relayURL) => {
+          //console.log(events, relayURL);
         }
-        connectRelay();
-      }, [pubKey]);
+      );
+        
+      relayPool.onerror((err, relayUrl) => {
+        console.log("RelayPool notice", err, " from relay ", relayUrl);
+      });
+      relayPool.onnotice((relayUrl, notice) => {
+        console.log("RelayPool notice", notice, " from relay ", relayUrl);
+      });
+      return () => {
+        relayPool.close();
+      };
+    };
+    
+    window.onload = onLoad;
 
-    return (
-      <div className='nostrContainer'>
-        <div id="message-kind0-container"></div>
-        <p id="publicKeyResult"></p>
-        <div id="message-container"></div>
+    return () => {
+      window.onload = null;
+    };
+  }, []);
+  return (
+    
+    <div className="nostrContainer">
+      <div>
+      <NostrLogo className="nostrLogo"/>
+      <EventListComponent events={events} />
       </div>
-    );
-  }
-  
-  export default Nostr;
+    </div>
+  );
+};
+
+export default Nostr;
