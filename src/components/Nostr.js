@@ -66,7 +66,7 @@ const Nostr = () => {
               {
                 kinds: [1],
                 authors: [getHexPubKey()],
-                // since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
+                since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
               },
             ],
             userRelayList,
