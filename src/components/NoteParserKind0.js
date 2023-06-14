@@ -8,15 +8,16 @@ const NoteParserKind0 = ({note}) => {
   
   return (
     <div className='noteContainerKind0'>
+      <img className='nostr_pfp' src={picture} alt={display_name} />
       <h2>{name}</h2>
-      <p>{about}</p>
       <a href={process.env.REACT_APP_NOSTR_OUTER_PROFILES+nPub} target="_blank" rel="noreferrer" >
       <code style={{ textDecoration: 'none' }}>{nPub.slice(0, 16)}...</code>
       </a>
+      <p>{about}</p>
       <hr />
       <div className='noteButtonBox'>
         <a href={`lightning:${lud16}`} target="_blank" rel="noreferrer"><LnIcon className="svg-src"/></a>
-        <a href={process.env.REACT_APP_NOSTR_OUTER_CHAT+nPub} target="_blank" rel="noreferrer"><GoChat className="svg-src"/></a>
+        <a href={process.env.REACT_APP_NOSTR_OUTER_CHAT+note.pubkey} target="_blank" rel="noreferrer"><GoChat className="svg-src"/></a>
         <a href={process.env.REACT_APP_NOSTR_OUTER_PROFILES+nPub} target="_blank" rel="noreferrer"><GoOut className="svg-src"/></a>
       </div>
     </div>

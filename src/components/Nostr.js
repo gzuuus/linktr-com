@@ -6,7 +6,6 @@ import { NostrLogo } from "../graphics/index.js";
 
 const Nostr = () => {
   const [events, setEvents] = useState([]);
-  // const [userRelayList, setuserRelayList] = useState([]);
   const [uniqueEvents, setUniqueEvents] = useState(new Set());
 
   const relayList = useMemo(() => [
@@ -45,7 +44,6 @@ const Nostr = () => {
           let objRelays = [];
           const objRecommendedRelays = [];
           try {
-
             if (event.kind === 3) {
               objRelays = Object.keys(JSON.parse(event.content));
             }}catch (error) {
@@ -62,11 +60,13 @@ const Nostr = () => {
               {
                 kinds: [0],
                 authors: [getHexPubKey()],
+                limit:1,
               },
               {
                 kinds: [1],
                 authors: [getHexPubKey()],
                 // since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
+                limit:process.env.REACT_APP_NOSTR_NOTES_TO_SHOW,
               },
             ],
             userRelayList,
@@ -109,10 +109,12 @@ const Nostr = () => {
   }, []);
   return (
     
-    <div className="nostrContainer">
+    <div>
       <div>
       <NostrLogo className="nostrLogo"/>
+      <h3>Nostr</h3>
       <EventListComponent events={events} />
+      <button><a href={process.env.REACT_APP_NOSTR_OUTER_PROFILES+nip19.npubEncode(getHexPubKey())} target="_blank" rel="noreferrer">More...</a></button>
       </div>
     </div>
   );

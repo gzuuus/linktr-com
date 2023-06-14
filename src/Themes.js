@@ -7,7 +7,7 @@ const themes = {
       textColor: '#ffffff',
       hoverColor: '#ff9900',
       accentColor: '#916dbb',
-      transLucid: '#0000006e',
+      transLucid: '#000000a3',
     },
     dark: {
       backgroundColor: '#000000',
@@ -18,7 +18,7 @@ const themes = {
       hoverColor: '#ff9900',
       accentColor: '#916dbb',
       aColor: '#ffffff',
-      transLucid: '#00000038',
+      transLucid: '#000000a3',
     },
     light: {
       backgroundColor: '#ffffff',
@@ -29,7 +29,7 @@ const themes = {
       hoverColor: '#ff9900',
       accentColor: '#916dbb',
       aColor: '#000000',
-      transLucid: '#ffffff8a',
+      transLucid: '#ffffffb2',
     },
     bitcoin: {
         backgroundColor: '#f90',
@@ -40,7 +40,7 @@ const themes = {
         hoverColor: '#a56300',
         accentColor: '#6a440a',
         aColor: 'black',
-        transLucid: '#ffffff38',
+        transLucid: '#ffffffb2',
       },
       ocean: {
         backgroundColor: '#0d1b33',
@@ -51,7 +51,7 @@ const themes = {
         hoverColor: '#ff9900',
         accentColor: '#00a0b0',
         aColor: '#ffffff',
-        transLucid: '#00000038',
+        transLucid: '#000000a3',
       }
       
   };

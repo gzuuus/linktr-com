@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Links } from './components/Links';
 import { Donations } from './components/Donations';
 import Nostr from './components/Nostr';
@@ -21,16 +21,33 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 function App() {
-  const theme = process.env.REACT_APP_THEME || 'default';
+  const [themePicked, setTheme] = useState(process.env.REACT_APP_THEME_SELECTOR === 'true' ? process.env.REACT_APP_THEME : process.env.REACT_APP_THEME);
+
+  const handleThemeChange = (newTheme) => {
+    setTheme(newTheme);
+  };
+
+  const themeButtons = Object.keys(themes).map((key) => {
+    const theme = themes[key];
+    return (
+      <button key={key} className='themeButton' style={{ backgroundColor: theme.elementsBColor }} title={key} onClick={() => handleThemeChange(key)}></button>
+    );
+  });
+
   return (
     <div className='mainDiv'>
-      <GlobalStyles theme={theme} />
+      {process.env.REACT_APP_THEME_SELECTOR === 'true' && (
+        <div className='selectThemeButtonBox'>
+          {themeButtons}
+        </div>
+      )}
+
+      <GlobalStyles theme={themePicked} />
       <div className='mainContainer'>
         <img className='header-img' src={`./img/${process.env.REACT_APP_PFP}`} alt="pfp" />
         <h1>{process.env.REACT_APP_HEADING}</h1>
         <Links></Links>
         <Donations></Donations>
-        
       </div>
 
       {process.env.REACT_APP_SHOW_MEETUPS === 'true' && (
@@ -39,7 +56,7 @@ function App() {
         </div>
       )}
       {process.env.REACT_APP_NOSTR_SHOW === 'true' && (
-        <div className='meetupContainer'>
+        <div className='nostrContainer'>
           <Nostr/>
         </div>
       )}

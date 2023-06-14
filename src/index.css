@@ -1,3 +1,6 @@
+:root{
+  --default-border-radius: 15px;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -15,27 +18,21 @@ code {
 	background-color: var(--elements-b-color);
   font-size: small;
 	padding: 5px 10px;
-	border-radius: 10px;
+	border-radius: var(--default-border-radius);
   color: var(--accent-color);
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 
-li, button {
-	margin: 20px;
+button {
+	margin: 15px;
 	background-color: var(--elements-b-color);
   color: var(--text-color);
-	padding: 15px 25px;
-	border-radius: 10px;
+	border-radius: var(--default-border-radius);
   border: none;
   cursor: pointer;
 	text-align: center;
 }
 
-li:hover, button:hover {
+button:hover {
   background-color: var(--hover-b-color);
 }
 
@@ -48,7 +45,7 @@ a {
   text-decoration: none;
 }
 
-a:hover, li:hover {
+a:hover {
   color: var(--hover-color);
 
 }
@@ -58,19 +55,10 @@ a code {
 a code:hover {
 	color: var(--hover-color);
 }
-.meetupElement h4,
-.meetupElement span{
-	background: var(--translucid-b-color);
-	padding: 5px;
-	border-radius: 15px;
-  text-shadow: 0 0 10px var(--elements-b-color);
-}
-.meetupElement h4:hover {
-  color: var(--hover-color);
-}
 h1, h2, h3, h4{
   color: var(--text-color);
   margin: 0px;
+  margin-bottom: 2px;
 }
 a svg path {
   fill: var(--accent-color);
@@ -78,9 +66,28 @@ a svg path {
 a svg:hover path {
   fill: var(--hover-color);
 }
+button a {
+	display: block ;
+  padding: 15px 15px;
+}
 svg {
 	width: 100%;
   overflow: visible;
+}
+hr {
+	color: var(--hover-b-color);
+	margin: 10px 0px;
+}
+blockquote {
+	border-left: 2px solid var(--background-color);
+	padding-left: 5px;
+}
+div.message-kind0, div.message-kind1{
+  background-color: var(--container-b-color);
+  margin: 10px;
+  padding: 15px;
+  border-radius: var(--default-border-radius);
+  word-wrap: break-word;
 }
 .svg-src {
 	background: var(--elements-b-color);
@@ -89,16 +96,31 @@ svg {
   margin: 0px 5px;	
   width: auto;
 }
-hr {
-	color: var(--hover-b-color);
-	margin: 10px 0px;
+.selectThemeButtonBox {
+	position: fixed;
+	top: 10px;
+	right: 10px;
 }
-div.message-kind0, div.message-kind1{
-  background-color: var(--container-b-color);
-  margin: 10px;
-  padding: 15px;
-  border-radius: 10px;
-  word-wrap: break-word;
+.themeButton {
+	margin: 1px;
+	border: 1px solid var(--accent-color);
+	padding: 12px;
+	border-radius: 64px;
+  transform: 0.2s;
+}
+.themeButton:hover {
+  transform: scale(1.1);
+}
+.meetupElement h4,
+.meetupElement span{
+	background: var(--translucid-b-color);
+	padding: 5px;
+	border-radius: var(--default-border-radius);
+  text-shadow: 0 0 10px var(--elements-b-color);
+  margin-bottom: 10px;
+}
+.meetupElement h4:hover {
+  color: var(--hover-color);
 }
 .mainDiv {
 	width: 30em;
@@ -111,7 +133,7 @@ div.message-kind0, div.message-kind1{
 	align-items: center;
 	background-color: var(--container-b-color);
 	padding: 30px 0px 0px 0px;
-	border-radius: 20px;
+	border-radius: var(--default-border-radius);
 }
 
 .meetupElementDiv {
@@ -119,7 +141,7 @@ div.message-kind0, div.message-kind1{
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 20px;
+  border-radius: var(--default-border-radius);
   margin: 15px 0px;
 }
 
@@ -127,17 +149,21 @@ div.message-kind0, div.message-kind1{
   padding:15px;
   background-color: var(--translucid-b-color);
 }
-.meetupElementContent h4 {
-	margin-bottom: 10px;
+.meetupContainer {
+	text-align: center;
 }
 
-.linkContainer {
+.linkContainer, .donations {
 	width: 100%;
+	display: flex;
+	flex-direction: column;
+  text-align: center;
 }
 .nostrContainer{
+  word-break: break-word;
   text-align: center;
-  width: 100%;
 }
+
 .nostr-img {
 	max-width: 100px;
 	margin: 10px;
@@ -152,13 +178,6 @@ div.message-kind0, div.message-kind1{
   border-radius: 50px;
 }
 
-.donations {
-	display: flex;
-	flex-direction: column;
-  text-align: center;
-  word-wrap: break-word;
-  width: 100%;
-}
 .exit-icon {
 	max-width: 18px;
   opacity: 80%;
@@ -174,19 +193,15 @@ div.message-kind0, div.message-kind1{
 	width: 50%;
 }
 
-.inner > li:last-child {
-	margin: 0px;
-	width: auto;
-	padding: 15px;
-}
-.nostrContainer {
-  word-break: break-word;
-}
 .noteContainer {
 	background-color: var(--container-b-color);
 	padding: 5px 15px 10px 15px;
-	border-radius: 15px;
+	border-radius: var(--default-border-radius);
 	margin: 15px 0px;
+  text-align: left;
+}
+.noteContainerKind0 {
+  text-align: center;
 }
 .noteContentContainer, .noteContainerKind0 {
 	margin: 10px 0px;
@@ -204,15 +219,13 @@ div.message-kind0, div.message-kind1{
 .urlPreview{
   padding: 5px;
 	background: var(--hover-b-color);
-	border-radius: 15px;
+	border-radius: var(--default-border-radius);
   margin: 10px 0px;
 }
-.meetupContainer {
-	text-align: center;
-}
+
 .logo2140 {
 	width: 70%;
-  background: var(--accent-color);
+  background: black;
   margin-top: 21px;
   padding: 0px 21px;
   border-radius: 85px;
@@ -228,6 +241,10 @@ div.message-kind0, div.message-kind1{
 .nostrLogo path {
 	fill: var(--hover-b-color);
 }
+.nostr_pfp {
+	max-width: 150px;
+	border-radius: 64px;
+}
 .noteButtonBox {
 	display: flex;
 	justify-content: center;
@@ -240,6 +257,7 @@ div.message-kind0, div.message-kind1{
 	margin-bottom: 15px;
 }
 
+
 @media only screen and (max-width: 767px) {
   .header-img{
     max-width: 100px;
@@ -249,8 +267,8 @@ div.message-kind0, div.message-kind1{
     width: 100%;
     margin-top: 0px;
   }
-  .mainContainer{
-    background: none;
+  .mainContainer {
+    background: var(--container-b-color);
   }
   h1 {
     font-size: 25px;
@@ -259,11 +277,12 @@ div.message-kind0, div.message-kind1{
     display: block;
     height: auto;
   }
-  li {
-    margin: 12px;
-    padding: 12px 25px;
-  }
+
   .dbuttons.inner {
     width: auto;
+  }
+  .noteContainer {
+    background-color: var(--container-b-color);
+    border-top: 1px solid var(--accent-color);
   }
 }
