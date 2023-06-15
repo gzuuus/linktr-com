@@ -12,57 +12,38 @@ const NoteParser = ({ note }) => {
     const result = [];
     let lastIndex = 0;
     let match;
+
     while ((match = regex.exec(note.content))) {
       const beforeLink = note.content.substring(lastIndex, match.index);
       if (beforeLink) {
         result.push(<span key={lastIndex+uuidv4()}><ReactMarkdown>{beforeLink}</ReactMarkdown></span>);
       }
-
+      
       const link = match[0];
       const prefix = link.startsWith("nostr:") ? "nostr:" : "";
       const content = link.substring(prefix.length);
       
       if (link.startsWith(prefix + "npub1")) {
         result.push(
-          <a
-            key={link + uuidv4()}
-            href={process.env.REACT_APP_NOSTR_OUTER_PROFILES + content}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a key={link + uuidv4()} href={process.env.REACT_APP_NOSTR_OUTER_PROFILES + content} target="_blank" rel="noreferrer" >
             {"👤@" + content.slice(0, 16)}...
           </a>
         );
       } else if (link.startsWith(prefix + "nevent")) {
         result.push(
-          <a
-            key={link + uuidv4()}
-            href={process.env.REACT_APP_NOSTR_OUTER_NOTES + content}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a key={link + uuidv4()} href={process.env.REACT_APP_NOSTR_OUTER_NOTES + content} target="_blank" rel="noreferrer" >
             {"📰@" + content.slice(0, 16)}...
           </a>
         );
       } else if (link.startsWith(prefix + "note")) {
         result.push(
-          <a
-            key={link + uuidv4()}
-            href={process.env.REACT_APP_NOSTR_OUTER_NOTES + content}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a key={link + uuidv4()} href={process.env.REACT_APP_NOSTR_OUTER_NOTES + content} target="_blank" rel="noreferrer" >
             {"📰@" + content.slice(0, 16)}...
           </a>
         );
       } else if (link.startsWith(prefix + "naddr")) {
         result.push(
-          <a
-            key={link + uuidv4()}
-            href={process.env.REACT_APP_NOSTR_OUTER_LONG + content}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a key={link + uuidv4()} href={process.env.REACT_APP_NOSTR_OUTER_LONG + content} target="_blank" rel="noreferrer" >
             {"📰@" + content.slice(0, 16)}...
           </a>
         );
@@ -116,7 +97,7 @@ const NoteParser = ({ note }) => {
       
       const tagTexts = [];
       if (hasNotes) {
-        tagTexts.push(<code>💬 thread</code>);
+        tagTexts.push(<a key={uuidv4()} href={process.env.REACT_APP_NOSTR_OUTER_NOTES + encodedEvent} target="_blank" rel="noreferrer"><code>💬 thread</code></a>);
       }
       const tagText = (
         <div className='noteTagContainer'>

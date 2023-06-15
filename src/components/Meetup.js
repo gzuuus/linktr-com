@@ -30,12 +30,12 @@ useEffect(() => {
       const decodedTitle = decodeHtml(titleRendered);
       return (
         <div className='meetupElementDiv' style={style} key={id}>
-          <div className='meetupElementContent'>
-            <a href={link} target="_blank" rel="noreferrer" className='meetupElement' >
+          <a href={link} target="_blank" rel="noreferrer" className='meetupElement' >
+            <div className='meetupElementContent'>
               <h4>{decodedTitle}</h4>
               <span>📅 {fecha} 🕖 {hora.slice(0, 5)}h </span>
-            </a>
-          </div>
+            </div>
+          </a>
         </div>
       );
     });

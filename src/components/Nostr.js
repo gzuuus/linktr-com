@@ -27,7 +27,7 @@ const Nostr = () => {
     }
   };
   
-  
+  const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
   useEffect(() => {
     const onLoad = () => {
       const relayPool = new RelayPool(relayList);
@@ -66,7 +66,7 @@ const Nostr = () => {
                 kinds: [1],
                 authors: [getHexPubKey()],
                 // since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
-                limit:process.env.REACT_APP_NOSTR_NOTES_TO_SHOW,
+                limit:NOTES_TO_SHOW,
               },
             ],
             userRelayList,

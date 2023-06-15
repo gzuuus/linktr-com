@@ -132,7 +132,7 @@ div.message-kind0, div.message-kind1{
 	flex-direction: column;
 	align-items: center;
 	background-color: var(--container-b-color);
-	padding: 30px 0px 0px 0px;
+	padding: 30px 15px;
 	border-radius: var(--default-border-radius);
 }
 
@@ -195,7 +195,7 @@ div.message-kind0, div.message-kind1{
 
 .noteContainer {
 	background-color: var(--container-b-color);
-	padding: 5px 15px 10px 15px;
+	padding: 15px;
 	border-radius: var(--default-border-radius);
 	margin: 15px 0px;
   text-align: left;
@@ -208,6 +208,10 @@ div.message-kind0, div.message-kind1{
 }
 .noteContentContainer a {
 	text-decoration: underline;
+  padding: 0 4px;
+}
+.noteContentContainer p {
+	display: inline;
 }
 .isImage, .isVideo {
 	width: 100%;
@@ -217,7 +221,7 @@ div.message-kind0, div.message-kind1{
 	margin: 15px 0px;
 }
 .urlPreview{
-  padding: 5px;
+  padding: 5px 10px;
 	background: var(--hover-b-color);
 	border-radius: var(--default-border-radius);
   margin: 10px 0px;
@@ -264,8 +268,8 @@ div.message-kind0, div.message-kind1{
     margin: 5px;
   }
   .mainDiv {
-    width: 100%;
-    margin-top: 0px;
+    width: auto;
+    margin: 10px;
   }
   .mainContainer {
     background: var(--container-b-color);
