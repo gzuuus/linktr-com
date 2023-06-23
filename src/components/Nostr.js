@@ -27,8 +27,9 @@ const Nostr = () => {
     }
   };
   
-  const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
+  
   useEffect(() => {
+    const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
     const onLoad = () => {
       const relayPool = new RelayPool(relayList);
 
@@ -65,7 +66,6 @@ const Nostr = () => {
               {
                 kinds: [1],
                 authors: [getHexPubKey()],
-                // since: (Math.floor((new Date().getTime() - (7 * 24 * 60 * 60 * 1000)) / 1000)),
                 limit:NOTES_TO_SHOW,
               },
             ],
@@ -111,8 +111,10 @@ const Nostr = () => {
     
     <div>
       <div>
-      <NostrLogo className="nostrLogo"/>
-      <h3>Nostr</h3>
+        <div className="nostrHeading">
+          <NostrLogo className="nostrLogo"/>
+          <h3>Nostr</h3>
+        </div>
       <EventListComponent events={events} />
       <button><a href={process.env.REACT_APP_NOSTR_OUTER_PROFILES+nip19.npubEncode(getHexPubKey())} target="_blank" rel="noreferrer">More...</a></button>
       </div>

@@ -215,7 +215,6 @@ div.message-kind0, div.message-kind1{
 }
 .isImage, .isVideo {
 	width: 100%;
-	max-height: 650px;
 	max-width: 500px;
 	display: block;
 	margin: 15px 0px;
@@ -235,12 +234,12 @@ div.message-kind0, div.message-kind1{
   border-radius: 85px;
 }
 .nostrLogo {
-	max-height: 72px;
+	max-height: 28px;
 	background: var(--accent-color);
 	width: auto;
-	border-radius: 85px;
-	padding: 21px;
-	margin: 21px;
+	border-radius: 15px;
+	padding: 6px;
+	margin: 12px;
 }
 .nostrLogo path {
 	fill: var(--hover-b-color);
@@ -259,6 +258,21 @@ div.message-kind0, div.message-kind1{
 }
 .noteTagContainer {
 	margin-bottom: 15px;
+}
+.creditsContainer {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	color: var(--accent-color) ;
+  opacity: 0.3;
+}
+.creditsContainer:hover {
+ opacity: 1;
+}
+.nostrHeading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 
@@ -288,5 +302,8 @@ div.message-kind0, div.message-kind1{
   .noteContainer {
     background-color: var(--container-b-color);
     border-top: 1px solid var(--accent-color);
+  }
+  .creditsContainer {
+    display: none;
   }
 }

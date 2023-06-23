@@ -29,6 +29,8 @@ useEffect(() => {
       };
       const decodedTitle = decodeHtml(titleRendered);
       return (
+        <>
+        <Logo2140 className='logo2140'/>
         <div className='meetupElementDiv' style={style} key={id}>
           <a href={link} target="_blank" rel="noreferrer" className='meetupElement' >
             <div className='meetupElementContent'>
@@ -37,9 +39,12 @@ useEffect(() => {
             </div>
           </a>
         </div>
+        </>
       );
     });
     setMeetupElement(meetupComponents);
+  } else {
+    setMeetupElement(null);
   }
 }, [meetups]);
 
@@ -51,7 +56,6 @@ useEffect(() => {
 
   return (
     <>
-    <Logo2140 className='logo2140'/>
       {meetupElement}
     </>
   );
