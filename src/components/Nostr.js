@@ -6,7 +6,7 @@ import { NostrLogo } from "../graphics/index.js";
 
 const Nostr = () => {
   const [events, setEvents] = useState([]);
-  const [uniqueEvents, setUniqueEvents] = useState(new Set());
+  //const [uniqueEvents, setUniqueEvents] = useState(new Set());
 
   const relayList = useMemo(() => [
     "wss://nos.lol",
@@ -26,8 +26,6 @@ const Nostr = () => {
         return process.env.REACT_APP_NOSTR_PUBKEY;
     }
   };
-  
-  
   useEffect(() => {
     const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
     const onLoad = () => {
@@ -61,7 +59,6 @@ const Nostr = () => {
               {
                 kinds: [0],
                 authors: [getHexPubKey()],
-                limit:1,
               },
               {
                 kinds: [1],
@@ -71,11 +68,8 @@ const Nostr = () => {
             ],
             userRelayList,
             (event, isAfterEose, relayURL) => {
-              if (!uniqueEvents.has(event.id)) {
-                setUniqueEvents(new Set(uniqueEvents.add(event.id)));
-                  setEvents(events =>
-                    utils.insertEventIntoDescendingList(events, event))
-              }
+              setEvents(events =>
+              utils.insertEventIntoDescendingList(events, event))
               //console.log(event, isAfterEose, relayURL);
             },
             undefined,
@@ -102,13 +96,12 @@ const Nostr = () => {
     };
     
     window.onload = onLoad;
-
+    
     return () => {
       window.onload = null;
     };
-  }, []);
+  }, [relayList]);
   return (
-    
     <div>
       <div>
         <div className="nostrHeading">
@@ -116,7 +109,9 @@ const Nostr = () => {
           <h3>Nostr</h3>
         </div>
       <EventListComponent events={events} />
-      <button><a href={process.env.REACT_APP_NOSTR_OUTER_PROFILES+nip19.npubEncode(getHexPubKey())} target="_blank" rel="noreferrer">More...</a></button>
+      {parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW) > 0 && (
+          <button><a href={ process.env.REACT_APP_NOSTR_OUTER_PROFILES + nip19.npubEncode(getHexPubKey()) } target="_blank" rel="noreferrer" > More... </a></button>
+        )}
       </div>
     </div>
   );

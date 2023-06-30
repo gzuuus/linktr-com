@@ -4,8 +4,9 @@ import NoteParserKind0 from "./NoteParserKind0.js";
 
 function EventListComponent({ events }) {
   const uniqueEvents = {};
+  const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
+  let noteParserCount = 0; // Variable de conteo adicional
 
-  // Filtramos los eventos duplicados
   events.forEach((event) => {
     if (event.kind === 0) {
       if (uniqueEvents[event.kind] === undefined) {
@@ -14,27 +15,30 @@ function EventListComponent({ events }) {
         uniqueEvents[event.kind] = event;
       }
     } else {
-      uniqueEvents[event.id] = event;
+      if (noteParserCount < NOTES_TO_SHOW) { // Verificar si se ha alcanzado el límite de NOTES_TO_SHOW
+        uniqueEvents[event.id] = event;
+        noteParserCount++; // Incrementar el conteo
+      }
     }
   });
 
   const uniqueEventsList = Object.values(uniqueEvents);
-    const eventList = uniqueEventsList.map((event, index) => {
-      return (
-        <div className="noteContainer" key={index}>
-          {event.kind === 0 ? (
-            <>
-              <NoteParserKind0 note={event} />
-            </>
-          ) : (
-            <>
-              <NoteParser note={event} />
-            </>
-          )}
-        </div>
-      );
-    });
-    
+  const eventList = uniqueEventsList.map((event, index) => {
+    return (
+      <div className="noteContainer" key={index}>
+        {event.kind === 0 ? (
+          <>
+            <NoteParserKind0 note={event} />
+          </>
+        ) : (
+          <>
+            <NoteParser note={event} />
+          </>
+        )}
+      </div>
+    );
+  });
+
   return (
     <div>
       {eventList}

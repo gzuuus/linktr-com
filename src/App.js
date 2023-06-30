@@ -41,9 +41,6 @@ function App() {
           {themeButtons}
         </div>
       )}
-        <div className='creditsContainer'>
-          <span><a href='https://github.com/gzuuus/linktr' target='_blank' rel='noreferrer'>Made with love by gzuuus 💜</a></span>
-        </div>
       <GlobalStyles theme={themePicked} />
       <div className='mainContainer'>
         <img className='header-img' src={`./img/${process.env.REACT_APP_PFP}`} alt="pfp" />
@@ -60,6 +57,11 @@ function App() {
       {process.env.REACT_APP_NOSTR_SHOW === 'true' && (
         <div className='nostrContainer'>
           <Nostr/>
+        </div>
+      )}
+      {process.env.REACT_APP_NOSTR_SHOW_FOOTER === 'true' && (
+        <div className='creditsContainer'>
+          <span><a href='https://github.com/gzuuus/linktr' target='_blank' rel='noreferrer'>With 💜 by gzuuus </a></span>
         </div>
       )}
     </div>
