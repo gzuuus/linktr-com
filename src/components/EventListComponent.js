@@ -5,7 +5,7 @@ import NoteParserKind0 from "./NoteParserKind0.js";
 function EventListComponent({ events }) {
   const uniqueEvents = {};
   const NOTES_TO_SHOW = parseInt(process.env.REACT_APP_NOSTR_NOTES_TO_SHOW);
-  let noteParserCount = 0; // Variable de conteo adicional
+  let noteParserCount = 0;
 
   events.forEach((event) => {
     if (event.kind === 0) {
@@ -15,9 +15,9 @@ function EventListComponent({ events }) {
         uniqueEvents[event.kind] = event;
       }
     } else {
-      if (noteParserCount < NOTES_TO_SHOW) { // Verificar si se ha alcanzado el límite de NOTES_TO_SHOW
+      if (noteParserCount < NOTES_TO_SHOW) {
         uniqueEvents[event.id] = event;
-        noteParserCount++; // Incrementar el conteo
+        noteParserCount++;
       }
     }
   });

@@ -9,11 +9,12 @@ const Nostr = () => {
   //const [uniqueEvents, setUniqueEvents] = useState(new Set());
 
   const relayList = useMemo(() => [
-    "wss://nos.lol",
-    "wss://relay.nostr.band",
+    "wss://nos.lol/",
+    "wss://relay.nostr.band/",
     "wss://nostr.wine/",
-    "wss://universe.nostrich.land/",
-    "wss://purplepag.es/"
+    "wss://purplepag.es/",
+    "wss://relayable.org/",
+    "wss://relay.damus.io",
   ], []);
 
   const getHexPubKey = (inNpub) => {
